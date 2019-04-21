@@ -6,20 +6,19 @@ app.set('port', (process.env.PORT || 3000));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-
 app.use(bodyParser.json());
 
-// OpenWeatherAPI Key 
-const openWeatherApiKey= "&APPID=eaa6ee68dd9f5bca88330a1756680c23";
+// OpenWeatherAPI Key Not worth Hiding
+const openWeatherApiKey= "&APPID=HIDDEN";
 
 // Default Post Route For WebHook // Must be changed in DialogFlow as well.
 app.post('/', (req, res) => {
   // saving the action to determine the intent
-  var action = req.body["result"].action;
+  let action = req.body["result"].action;
   // city intent check for city parameter
   if(action == "weather-intent-city"){
     // retrieve city parameter from request
-    var city = req.body["result"]["parameters"].city;
+    let city = req.body["result"]["parameters"].city;
     // prepare weather API request with City and API KEY
     const options = {
       method: 'GET',
